@@ -1,0 +1,17 @@
+# Material original (no forma parte de la web): se queda solo en local
+*.zip
+nrt_*.jpg
+Máquina de tatuaje*.png
+/package-lock.json
+
+# Dependencias, compilados y secretos
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+# Configuración local
+.claude/
+.DS_Store
+Thumbs.db

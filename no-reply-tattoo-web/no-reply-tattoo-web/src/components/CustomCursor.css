@@ -1,0 +1,74 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 600;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor.is-hidden {
+  opacity: 0;
+}
+
+.cursor__ring {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid rgba(236, 231, 222, 0.55);
+  border-radius: 50%;
+  transition:
+    width 0.35s var(--ease-out),
+    height 0.35s var(--ease-out),
+    margin 0.35s var(--ease-out),
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    opacity 0.3s;
+}
+
+.cursor__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.25s,
+    transform 0.35s var(--ease-out);
+}
+
+.cursor--link .cursor__ring {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border-color: rgba(236, 231, 222, 0.85);
+}
+
+.cursor--text .cursor__ring {
+  opacity: 0;
+}
+
+.cursor--view .cursor__ring {
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  background: var(--c-bone);
+  border-color: var(--c-bone);
+}
+
+.cursor--view .cursor__label {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sobre las fotos ocultamos el cursor nativo para mostrar el disco "VER" */
+.has-cursor [data-cursor='view'] {
+  cursor: none;
+}

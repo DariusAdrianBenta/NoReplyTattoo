@@ -1,0 +1,120 @@
+.bcta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(110px, 15vw, 220px);
+  background: var(--c-ink);
+}
+
+.bcta__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.bcta__media .photo {
+  width: 100%;
+  height: 100%;
+}
+
+.bcta__media .photo__img {
+  filter: grayscale(1) contrast(1.1) brightness(0.55);
+}
+
+.bcta__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.7) 55%, rgba(10, 10, 10, 0.45) 100%),
+    linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent 40%);
+}
+
+.bcta__inner {
+  position: relative;
+}
+
+.bcta__title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3.4rem, 10vw, 10rem);
+  line-height: 0.88;
+}
+
+.bcta__top {
+  -webkit-text-stroke-width: 1.5px;
+}
+
+.bcta__bottom {
+  padding-left: clamp(0px, 8vw, 140px);
+}
+
+.bcta__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 32px 64px;
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+.bcta__row .lead {
+  max-width: 28em;
+  color: var(--c-ash);
+}
+
+.bcta__actions {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.bcta__alt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  font-size: 0.8125rem;
+  color: var(--c-ash);
+}
+
+.bcta__alt a {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-bone);
+}
+
+.bcta__o {
+  position: absolute;
+  color: var(--c-bone);
+}
+
+.bcta__o--heart {
+  right: var(--gutter);
+  top: -40px;
+  opacity: 0.7;
+  transform: rotate(10deg);
+}
+
+.bcta__o--spark {
+  right: calc(var(--gutter) + 70px);
+  top: 30px;
+  opacity: 0.5;
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+
+@media (max-width: 767px) {
+  .bcta__title {
+    font-size: clamp(2.5rem, 12.6vw, 4.4rem);
+  }
+  .bcta__bottom {
+    padding-left: 0;
+  }
+  .bcta__actions,
+  .bcta__actions .btn {
+    width: 100%;
+  }
+  .bcta__o--heart {
+    top: -64px;
+  }
+}

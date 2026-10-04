@@ -1,0 +1,230 @@
+/* Sección "papel": cuaderno de bocetos / tattoo flash */
+.process {
+  background-color: var(--c-paper);
+  background-image:
+    radial-gradient(rgba(19, 18, 17, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.25), transparent 40%);
+  background-size: 22px 22px, 100% 100%;
+  color: var(--c-paper-ink);
+  overflow: hidden;
+}
+
+.process ::selection {
+  background: var(--c-paper-ink);
+  color: var(--c-paper);
+}
+
+.process .label,
+.process .label__num {
+  color: var(--c-paper-ink);
+}
+
+.process__head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+
+.process__head .label {
+  grid-column: 1 / -1;
+}
+
+.process__title {
+  position: relative;
+}
+
+.process__lettering {
+  position: absolute;
+  left: 0.2em;
+  bottom: -0.55em;
+  font-size: 0.32em;
+  color: var(--c-accent);
+  transform: rotate(-5deg);
+  white-space: nowrap;
+}
+
+.process__sketch {
+  width: clamp(140px, 17vw, 240px);
+  transform: rotate(4deg);
+  box-shadow: 0 18px 40px rgba(19, 18, 17, 0.25);
+  border: 8px solid #f4f0e8;
+}
+
+.process__sketch.is-in {
+  transform: rotate(4deg);
+}
+
+.process__sketch .photo {
+  aspect-ratio: 4 / 5;
+}
+
+.process__path {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin: clamp(40px, 6vw, 72px) 0 -6px;
+  fill: none;
+  stroke: var(--c-paper-ink);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+  opacity: 0.5;
+}
+
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding: 28px clamp(16px, 2vw, 32px) 8px 0;
+}
+
+.step + .step {
+  padding-left: clamp(16px, 2vw, 32px);
+  border-left: 1px solid var(--c-paper-line);
+}
+
+.step:nth-child(even) {
+  margin-top: clamp(0px, 6vw, 96px);
+}
+
+.step__top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+/* Los números se "entintan": de contorno a sólido al aparecer */
+.step__num {
+  font-size: clamp(5.6rem, 10vw, 10rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c-paper-ink);
+  background: linear-gradient(to top, var(--c-paper-ink) 50%, transparent 50%);
+  background-size: 100% 200%;
+  background-position: 0 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s var(--ease-out) var(--d),
+    transform 1s var(--ease-out) var(--d),
+    background-position 1.4s var(--ease-out) calc(var(--d) + 0.5s);
+}
+
+.step.is-in .step__num {
+  opacity: 1;
+  transform: none;
+  background-position: 0 100%;
+}
+
+.step__orn {
+  color: var(--c-paper-ink);
+  margin-top: 6px;
+}
+
+.step__title {
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.step__text {
+  max-width: 30ch;
+  color: rgba(19, 18, 17, 0.72);
+}
+
+.process__cta {
+  margin-top: clamp(48px, 6vw, 88px);
+  display: flex;
+  justify-content: center;
+}
+
+/* Botón negro sobre papel */
+.btn--ink {
+  --btn-bg: var(--c-paper-ink);
+  --btn-fg: var(--c-paper);
+  --btn-border: var(--c-paper-ink);
+  --btn-hover-bg: var(--c-paper);
+  --btn-hover-fg: var(--c-paper-ink);
+  --btn-hover-border: var(--c-paper-ink);
+}
+
+.process :focus-visible {
+  outline-color: var(--c-paper-ink);
+}
+
+@media (max-width: 1023px) {
+  .process__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  .step:nth-child(even) {
+    margin-top: 0;
+  }
+  .step:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .process__path {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .process__head {
+    grid-template-columns: 1fr;
+  }
+  .process__sketch {
+    position: absolute;
+    right: 0;
+    top: -12px;
+    width: 120px;
+    border-width: 6px;
+  }
+  .process__title {
+    margin-top: 110px;
+  }
+  .process__steps {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+    margin-top: 40px;
+  }
+  .step,
+  .step + .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 18px;
+    padding: 26px 0;
+    border-left: 0;
+    border-top: 1px solid var(--c-paper-line);
+  }
+  .step__top {
+    grid-row: span 2;
+    flex-direction: column;
+    margin: 0;
+    gap: 10px;
+  }
+  .step__num {
+    font-size: 4.6rem;
+  }
+  .step__orn {
+    width: 40px;
+    height: auto;
+  }
+  .step__title {
+    align-self: end;
+  }
+  .process__cta .btn {
+    width: 100%;
+  }
+}

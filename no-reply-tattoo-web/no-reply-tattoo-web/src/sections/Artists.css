@@ -1,0 +1,489 @@
+.artists {
+  background: var(--c-ink);
+  border-top: 1px solid var(--c-line);
+}
+
+.artists__head {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  align-items: end;
+  gap: 18px 48px;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+
+.artists__head .label {
+  grid-column: 1 / -1;
+}
+
+.artists__title {
+  position: relative;
+  width: fit-content;
+}
+
+.artists__lettering {
+  position: absolute;
+  right: -0.6em;
+  top: -0.95em;
+  font-size: 0.3em;
+  color: var(--c-ash);
+  transform: rotate(-7deg);
+  white-space: nowrap;
+}
+
+.artists__text {
+  padding-bottom: 8px;
+  color: var(--c-ash);
+}
+
+/* ===================================================== Selector circular */
+.crew__list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.crew__item {
+  scroll-margin-top: 120px;
+}
+
+.crew__pick {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.4s var(--ease);
+}
+
+/* Al elegir uno, los demás se apagan un poco */
+.crew__list.has-selection .crew__pick:not(.is-active) {
+  opacity: 0.5;
+}
+
+.crew__list.has-selection .crew__pick:not(.is-active):hover,
+.crew__list.has-selection .crew__pick:not(.is-active):focus-visible {
+  opacity: 0.9;
+}
+
+.crew__ring {
+  position: relative;
+  display: block;
+  width: min(100%, 132px);
+  aspect-ratio: 1;
+  margin-bottom: 8px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+/* Anillo exterior: fino y gris; al seleccionar se dibuja en el color de la web */
+.crew__ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--c-accent) var(--fill, 0deg), var(--c-line-strong) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  transition: --fill 0.7s var(--ease);
+}
+
+@property --fill {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.crew__pick.is-active .crew__ring::before {
+  --fill: 360deg;
+}
+
+.crew__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.crew__photo .photo__img {
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.8s var(--ease-out),
+    filter 0.6s var(--ease);
+}
+
+.crew__pick:hover .crew__photo .photo__img,
+.crew__pick:focus-visible .crew__photo .photo__img {
+  transform: scale(1.06);
+}
+
+.crew__pick.is-active .crew__photo .photo__img {
+  filter: grayscale(0.1);
+  transform: scale(1.06);
+}
+
+.crew__num {
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  background: var(--c-ink);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--c-ash);
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.crew__pick.is-active .crew__num {
+  border-color: var(--c-accent);
+  background: var(--c-accent);
+  color: var(--c-bone);
+}
+
+.crew__name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-bone);
+}
+
+.crew__role {
+  font-size: 0.75rem;
+  color: var(--c-smoke);
+}
+
+.crew__hint {
+  margin-top: 22px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--c-smoke);
+  transition: opacity 0.3s var(--ease);
+}
+
+.crew__hint.is-hidden {
+  opacity: 0;
+}
+
+/* =========================================================== Desplegable */
+.crew__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease);
+}
+
+.crew__panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.crew__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.crew__panel-content {
+  padding-top: clamp(16px, 2vw, 24px);
+  animation: crewIn 0.55s var(--ease) both;
+}
+
+@keyframes crewIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Ficha */
+.crew-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 380px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(20px, 3vw, 40px);
+  background: var(--c-carbon);
+  border: 1px solid var(--c-line);
+  border-radius: 24px;
+}
+
+.crew-card__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  background: var(--c-ink);
+  color: var(--c-bone);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.crew-card__close:hover,
+.crew-card__close:focus-visible {
+  background: var(--c-bone);
+  color: var(--c-ink);
+}
+
+.crew-card__media {
+  position: relative;
+  align-self: start;
+}
+
+.crew-card__media .photo {
+  aspect-ratio: 1;
+  border-radius: 16px;
+}
+
+.crew-card__media .photo__img {
+  filter: grayscale(0.6) contrast(1.06);
+}
+
+.crew-card__body {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 16px;
+  padding-right: 48px;
+}
+
+.crew-card__name {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.22em;
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  line-height: 0.88;
+}
+
+.crew-card__role {
+  margin-top: -4px;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  color: var(--c-ash);
+}
+
+.crew-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.crew-card__tags li {
+  padding: 6px 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 100px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.crew-card__bio {
+  max-width: 56ch;
+}
+
+.crew-card__highlights li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--c-bone);
+}
+
+.crew-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 6px;
+}
+
+.crew-card__link {
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-ash);
+}
+
+.crew-card__link:hover {
+  color: var(--c-bone);
+}
+
+/* Trabajos del artista */
+.crew-card__works {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding-top: clamp(16px, 2vw, 24px);
+  border-top: 1px solid var(--c-line);
+}
+
+.crew-card__works-label {
+  margin-bottom: 14px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-ash);
+}
+
+.crew-works {
+  --gap: 10px;
+}
+
+.crew-work {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.crew-work .photo {
+  aspect-ratio: 9 / 16;
+}
+
+.crew-work .photo__img {
+  transition:
+    opacity 0.9s var(--ease),
+    transform 1s var(--ease-out);
+}
+
+.crew-work:hover .photo__img,
+.crew-work:focus-visible .photo__img {
+  transform: scale(1.05);
+}
+
+.crew-work__plus {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--c-bone);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.crew-work:hover .crew-work__plus,
+.crew-work:focus-visible .crew-work__plus {
+  opacity: 1;
+}
+
+@media (max-width: 1023px) {
+  .artists__head {
+    grid-template-columns: 1fr;
+  }
+  .crew__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+  .crew-card {
+    grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .artists__lettering {
+    right: -0.2em;
+    top: -0.75em;
+  }
+  .crew__list {
+    column-gap: 10px;
+  }
+  .crew__ring {
+    width: min(100%, 96px);
+    padding: 4px;
+    margin-bottom: 4px;
+  }
+  .crew__num {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5625rem;
+  }
+  .crew__name {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+  }
+  .crew__role {
+    display: none;
+  }
+  .crew__hint {
+    margin-top: 14px;
+  }
+
+  /* Ficha en móvil: foto apaisada arriba y datos debajo */
+  .crew-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 14px 14px 20px;
+    border-radius: 20px;
+  }
+  .crew-card__media .photo {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+  }
+  .crew-card__close {
+    top: 24px;
+    right: 24px;
+    background: rgba(10, 10, 10, 0.7);
+  }
+  .crew-card__body {
+    gap: 12px;
+    padding: 0 4px;
+  }
+  .crew-card__name {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+  .crew-card__actions {
+    width: 100%;
+  }
+  .crew-card__actions .btn {
+    flex: 1 1 100%;
+  }
+  .crew-card__works {
+    padding-inline: 4px;
+  }
+  .crew-work__plus {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crew__panel,
+  .crew__ring::before {
+    transition: none;
+  }
+  .crew__panel-content {
+    animation: none;
+  }
+}

@@ -1,0 +1,49 @@
+.mcta {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mcta {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 350;
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    background: rgba(14, 14, 14, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--c-line);
+    transform: translateY(140%);
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .mcta.is-visible {
+    transform: none;
+  }
+
+  .mcta .mcta__main {
+    flex: 1;
+    min-height: 50px;
+    padding: 0 16px;
+    --btn-bg: var(--c-bone);
+    --btn-fg: var(--c-ink);
+    --btn-border: var(--c-bone);
+  }
+
+  .mcta__icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--c-line-strong);
+    color: var(--c-bone);
+  }
+
+  /* Espacio extra para que la barra no tape el final de la página */
+  .footer__bottom {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
+  }
+}

@@ -1,0 +1,128 @@
+.mmenu {
+  position: fixed;
+  inset: 0;
+  z-index: 390;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--header-h) + 24px) var(--gutter) calc(24px + env(safe-area-inset-bottom));
+  background: var(--c-ink);
+  overflow-y: auto;
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition:
+    clip-path 0.65s var(--ease-out),
+    visibility 0s linear 0.65s;
+}
+
+.mmenu.is-open {
+  visibility: visible;
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 0.65s var(--ease-out),
+    visibility 0s;
+}
+
+.mmenu__snake {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--header-h) + 18px);
+  color: var(--c-iron);
+  transform: rotate(-12deg);
+}
+
+.mmenu__nav ol {
+  display: grid;
+  gap: 2px;
+}
+
+.mmenu__nav li {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+
+.mmenu.is-open .mmenu__nav li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.18s + var(--i) * 0.05s);
+}
+
+.mmenu__nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 6px 0;
+}
+
+.mmenu__num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--c-smoke);
+  font-variant-numeric: tabular-nums;
+  min-width: 22px;
+}
+
+.mmenu__label {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 13vw, 4.2rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.mmenu__star {
+  align-self: flex-start;
+  margin-top: 0.6em;
+  color: var(--c-accent);
+}
+
+.mmenu__nav a:active .mmenu__label,
+.mmenu__nav a:hover .mmenu__label {
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--c-bone);
+}
+
+.mmenu__footer {
+  display: grid;
+  gap: 20px;
+  padding-top: 32px;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease) 0.1s;
+}
+
+.mmenu.is-open .mmenu__footer {
+  opacity: 1;
+  transition-delay: 0.45s;
+}
+
+.mmenu__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+}
+
+.mmenu__social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-ash);
+}
+
+.mmenu__address {
+  font-size: 0.8125rem;
+  color: var(--c-smoke);
+}
+
+@media (min-width: 1024px) {
+  .mmenu {
+    display: none;
+  }
+}

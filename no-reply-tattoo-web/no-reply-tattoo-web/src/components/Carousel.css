@@ -1,0 +1,173 @@
+/* Carrusel genérico: se mueve por posición (--i) y nº de elementos visibles (--per). */
+.carousel {
+  --gap: 20px;
+  --radius-c: 0px;
+}
+
+.carousel__viewport {
+  overflow: hidden;
+  /* el scroll vertical de la página sigue funcionando; el horizontal lo gestiona JS */
+  touch-action: pan-y;
+  border-radius: var(--radius-c);
+  outline: none;
+}
+
+.carousel__viewport:focus-visible {
+  box-shadow: 0 0 0 2px var(--c-line-strong);
+}
+
+.carousel__track {
+  display: flex;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateX(
+    calc(var(--i) * -1 * ((100% - (var(--per) - 1) * var(--gap)) / var(--per) + var(--gap)))
+  );
+  transition: transform 0.55s var(--ease);
+}
+
+.carousel__slide {
+  display: flex;
+  flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+  min-width: 0;
+}
+
+.carousel__slide > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.carousel__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* Puntos */
+.carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.carousel__dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.carousel__dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--c-iron);
+  transform: translate(-50%, -50%);
+  transition: width 0.35s var(--ease), background-color 0.35s var(--ease);
+}
+
+.carousel__dot.is-active::before {
+  width: 20px;
+  background: var(--c-accent);
+}
+
+/* Barra de progreso + contador */
+.carousel__progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  max-width: 420px;
+}
+
+.carousel__count {
+  flex: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-bone);
+  font-variant-numeric: tabular-nums;
+}
+
+.carousel__count span {
+  color: var(--c-smoke);
+}
+
+.carousel__bar {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--c-graphite);
+}
+
+.carousel__bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--c-accent);
+  transition: width 0.55s var(--ease);
+}
+
+/* Flechas */
+.carousel__arrows {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.carousel__btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c-bone);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.carousel__btn:hover:not(:disabled),
+.carousel__btn:focus-visible {
+  background: var(--c-bone);
+  color: var(--c-ink);
+}
+
+.carousel__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 639px) {
+  .carousel {
+    --gap: 12px;
+  }
+
+  .carousel__nav {
+    margin-top: 16px;
+  }
+
+  .carousel__btn {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__track,
+  .carousel__bar span {
+    transition: none;
+  }
+}

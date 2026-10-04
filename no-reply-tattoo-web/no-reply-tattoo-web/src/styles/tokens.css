@@ -1,0 +1,62 @@
+/* ==========================================================================
+   DISEÑO: COLORES, TIPOGRAFÍAS Y MEDIDAS
+   Cambia aquí la paleta y las fuentes de toda la web.
+   ========================================================================== */
+
+:root {
+  /* --- Colores base (negro / carbón) --- */
+  --c-ink: #0a0a0a;        /* fondo principal */
+  --c-carbon: #111111;     /* bloques alternos */
+  --c-coal: #161616;       /* bloques "ligeramente grises" */
+  --c-graphite: #232323;   /* bordes, superficies */
+  --c-iron: #343330;
+
+  /* --- Texto --- */
+  --c-bone: #ece7de;       /* blanco roto: títulos y textos */
+  --c-ash: #a8a39a;        /* gris claro: textos secundarios */
+  --c-smoke: #7c7871;      /* gris: etiquetas */
+
+  /* --- Papel (sección "Cómo funciona", estilo cuaderno de bocetos) --- */
+  --c-paper: #e7e1d5;
+  --c-paper-ink: #131211;
+  --c-paper-line: rgba(19, 18, 17, 0.16);
+
+  /* --- Acento (rojo flash tattoo, usar MUY poco) --- */
+  --c-accent: #b8432f;
+
+  --c-line: rgba(236, 231, 222, 0.13);
+  --c-line-strong: rgba(236, 231, 222, 0.28);
+
+  /* --- Tipografías --- */
+  --f-display: 'Anton', 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'TeX Gyre Heros Cn', sans-serif;
+  --f-body: 'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --f-letter: 'Pirata One', 'Old English Text MT', 'UnifrakturMaguntia', Georgia, serif;
+
+  /* --- Tamaños --- */
+  --fs-mega: clamp(5.5rem, 19vw, 21rem);
+  --fs-h1: clamp(3.6rem, 11vw, 10rem);
+  --fs-h2: clamp(3rem, 8.4vw, 8rem);
+  --fs-h3: clamp(1.9rem, 3.6vw, 3.2rem);
+  --fs-lead: clamp(1.12rem, 1.6vw, 1.45rem);
+  --fs-body: clamp(1rem, 1.05vw, 1.0625rem);
+  --fs-small: 0.875rem;
+  --fs-label: 0.75rem;
+
+  /* --- Layout --- */
+  --maxw: 1440px;
+  --gutter: clamp(16px, 4.4vw, 64px);
+  --section-y: clamp(88px, 12vw, 180px);
+  --header-h: 76px;
+  --radius: 2px;
+
+  /* --- Movimiento --- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 0.6s;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-h: 64px;
+  }
+}

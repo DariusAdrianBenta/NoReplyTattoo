@@ -1,0 +1,66 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+
+.modal.is-open .modal__backdrop {
+  opacity: 1;
+}
+
+.modal__panel {
+  position: absolute;
+  outline: none;
+}
+
+/* --- Panel lateral (formulario de cita) --- */
+.modal--drawer .modal__panel {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(780px, 100%);
+  background: var(--c-carbon);
+  border-left: 1px solid var(--c-line);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translate3d(100%, 0, 0);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.modal--drawer.is-open .modal__panel {
+  transform: none;
+}
+
+/* --- Lightbox (galería) --- */
+.modal--lightbox .modal__backdrop {
+  background: rgba(6, 6, 6, 0.97);
+}
+
+.modal--lightbox .modal__panel {
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.985);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.5s var(--ease-out);
+}
+
+.modal--lightbox.is-open .modal__panel {
+  opacity: 1;
+  transform: none;
+}
+
+body.is-locked {
+  overflow: hidden;
+  padding-right: var(--scrollbar, 0);
+}

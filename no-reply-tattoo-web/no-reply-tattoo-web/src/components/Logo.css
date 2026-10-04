@@ -1,0 +1,30 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.logo__word {
+  font-family: var(--f-display);
+  font-size: 1.55rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.logo__star {
+  color: var(--c-ash);
+  transition: transform 0.8s var(--ease-out);
+}
+
+.logo:hover .logo__star {
+  transform: rotate(180deg);
+}
+
+.logo__suffix {
+  font-family: var(--f-letter);
+  font-size: 1.35rem;
+  color: var(--c-ash);
+  transform: translateY(1px);
+}

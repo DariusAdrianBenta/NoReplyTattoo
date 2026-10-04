@@ -1,0 +1,197 @@
+.footer {
+  position: relative;
+  background: #070707;
+  overflow: hidden;
+  border-top: 1px solid var(--c-line);
+}
+
+/* --- Cinta de texto --- */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--c-line);
+  user-select: none;
+}
+
+.marquee__row {
+  display: flex;
+  flex: none;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.marquee__item:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-ash);
+}
+
+.marquee__item svg {
+  color: var(--c-smoke);
+}
+
+.marquee:hover .marquee__row {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* --- CTA --- */
+.footer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 28px;
+  padding-block: clamp(56px, 8vw, 110px);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.footer__cta-title {
+  position: relative;
+  font-size: clamp(3.4rem, 9vw, 8.4rem);
+  line-height: 0.9;
+}
+
+.footer__arrow {
+  position: absolute;
+  right: -90px;
+  bottom: -10px;
+  color: var(--c-smoke);
+  transform: rotate(-25deg);
+}
+
+/* --- Columnas --- */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 40px;
+  padding-block: clamp(48px, 6vw, 80px);
+}
+
+.footer__brand {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.footer__address {
+  font-size: 0.875rem;
+  color: var(--c-smoke);
+  max-width: 30ch;
+}
+
+.footer__h {
+  margin-bottom: 18px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-smoke);
+}
+
+.footer__nav {
+  display: grid;
+  gap: 4px;
+}
+
+.footer__nav a {
+  display: inline-block;
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  transition:
+    color 0.3s,
+    transform 0.4s var(--ease-out);
+}
+
+.footer__nav a:hover {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-bone);
+  transform: translateX(6px);
+}
+
+.footer__links {
+  display: grid;
+  gap: 4px;
+}
+
+.footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  color: var(--c-ash);
+  transition: color 0.3s;
+}
+
+.footer__links a:hover {
+  color: var(--c-bone);
+}
+
+/* --- Marca gigante --- */
+.footer__giant {
+  position: relative;
+  line-height: 0.74;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: -10px;
+}
+
+.footer__giant span {
+  display: block;
+  font-size: 25vw;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(236, 231, 222, 0.22);
+  transform: translateY(6%);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding-block: 22px calc(22px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--c-line);
+  font-size: 0.8125rem;
+  color: var(--c-smoke);
+}
+
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer__arrow {
+    display: none;
+  }
+  .footer__cta .btn {
+    width: 100%;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 20px;
+  }
+}

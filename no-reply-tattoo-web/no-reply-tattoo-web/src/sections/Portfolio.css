@@ -1,0 +1,307 @@
+.portfolio {
+  background: var(--c-ink);
+}
+
+.portfolio__head {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 380px);
+  align-items: end;
+  gap: 24px 48px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.portfolio__title {
+  margin-top: 18px;
+}
+
+.portfolio__intro {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding-bottom: 10px;
+}
+
+.portfolio__ig {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+/* --- Filtros --- */
+.portfolio__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 4px;
+  padding-block: 18px;
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.pf-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 3px;
+  min-height: 44px;
+  padding: 10px 16px;
+  font-family: var(--f-display);
+  font-size: clamp(1.15rem, 1.7vw, 1.6rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--c-smoke);
+  transition: color 0.3s;
+}
+
+.pf-filter sup {
+  font-family: var(--f-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--c-smoke);
+  top: 0;
+}
+
+.pf-filter::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--c-bone);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.pf-filter:hover {
+  color: var(--c-ash);
+}
+
+.pf-filter.is-active {
+  color: var(--c-bone);
+}
+
+.pf-filter.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Filtro por artista */
+.portfolio__artists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 clamp(24px, 3vw, 36px);
+}
+
+.pf-artist {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--c-ash);
+  border: 1px solid var(--c-line-strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pf-artist:hover,
+.pf-artist.is-active {
+  background: var(--c-bone);
+  color: var(--c-ink);
+}
+
+/* --- Carrusel (todas las fotos en el mismo formato 4:5) --- */
+.pf-carousel {
+  --gap: clamp(8px, 1vw, 14px);
+}
+
+.pf-item__btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.pf-item__btn .photo {
+  position: absolute;
+  inset: 0;
+}
+
+.pf-item__btn .photo__img {
+  transition:
+    opacity 0.9s var(--ease),
+    transform 1.1s var(--ease-out),
+    filter 0.6s var(--ease);
+  filter: grayscale(0.15);
+}
+
+.pf-item__btn:hover .photo__img,
+.pf-item__btn:focus-visible .photo__img {
+  transform: scale(1.05);
+  filter: grayscale(0);
+}
+
+.pf-item__meta {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.75), transparent);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.5s var(--ease-out);
+}
+
+.pf-item__btn:hover .pf-item__meta,
+.pf-item__btn:focus-visible .pf-item__meta {
+  opacity: 1;
+  transform: none;
+}
+
+.pf-item__title {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--f-display);
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pf-item__style {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.pf-item__plus {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+}
+
+.pf-empty {
+  padding: 48px 0;
+  text-align: center;
+}
+
+/* --- CTA bajo la galería --- */
+.portfolio__cta {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px 32px;
+  margin-top: clamp(40px, 5vw, 72px);
+  padding: clamp(24px, 3vw, 40px);
+  border: 1px solid var(--c-line);
+}
+
+.portfolio__cta-o {
+  color: var(--c-ash);
+}
+
+.portfolio__cta-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.portfolio__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 1023px) {
+  .portfolio__head {
+    grid-template-columns: 1fr;
+  }
+  .portfolio__cta {
+    grid-template-columns: auto 1fr;
+  }
+  .portfolio__cta-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Móvil: carrusel de 2 en 2, filtros deslizables */
+@media (max-width: 767px) {
+  .portfolio__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: calc(var(--gutter) - 12px);
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  .portfolio__filters::-webkit-scrollbar {
+    display: none;
+  }
+  .pf-filter {
+    flex: none;
+    scroll-snap-align: start;
+    padding-inline: 12px;
+  }
+  .pf-filter::after {
+    left: 12px;
+    right: 12px;
+  }
+  .portfolio__artists {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .portfolio__artists::-webkit-scrollbar {
+    display: none;
+  }
+  .pf-artist {
+    flex: none;
+  }
+  /* En táctil, mostramos la etiqueta del estilo siempre */
+  .pf-item__meta {
+    opacity: 1;
+    transform: none;
+    padding: 10px;
+  }
+  .pf-item__plus {
+    width: 28px;
+    height: 28px;
+  }
+  .pf-item__title {
+    font-size: 0.95rem;
+  }
+  .pf-item__style {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+  }
+  .portfolio__cta {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .portfolio__cta-actions .btn {
+    flex: 1 1 100%;
+  }
+}
